@@ -1,3 +1,4 @@
+const serverless = require("serverless-http");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongo = require("./conn.js");
@@ -6,12 +7,12 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.listen(process.env.PORT, async () => {
-  await mongo.connectToServer();
-  console.log(`Listening on por ${process.env.PORT}`);
-});
+//app.listen(process.env.PORT, async () => {
+//await mongo.connectToServer();
+//console.log(`Listening on por ${process.env.PORT}`);
+//});
 
 app.get("/", (req, res) => {
   res.send("Welcome to Don't Forget Me API");
@@ -64,3 +65,5 @@ app.get("/users", async (req, res) => {
   const result = await users.getUsers(mongo);
   res.json(result);
 });
+
+module.exports.handler = serverless(app);
