@@ -1,16 +1,14 @@
 module.exports = {
-  getUsers: async (mongo) => {
-    const userCollections = mongo.getDB().collection("user");
-
-    const data = await userCollections.find({}).toArray();
+  getUsers: async (db) => {
+    const data = await db.collection("user").find({}).toArray();
 
     return {
       statusOk: !!data,
       users: data,
     };
   },
-  update: async (mongo, email, body) => {
-    const userCollections = mongo.getDB().collection("user");
+  update: async (db, email, body) => {
+    const userCollections = db.collection("user");
     const updateResponse = await userCollections.updateOne(
       { email: email },
       { $set: body }
@@ -27,8 +25,8 @@ module.exports = {
       errorMessagge: "Error updating user. Try again",
     };
   },
-  getUserByEmail: async (mongo, email) => {
-    const userCollections = mongo.getDB().collection("user");
+  getUserByEmail: async (db, email) => {
+    const userCollections = db.collection("user");
     const data = await userCollections.findOne({ email: email });
 
     if (data) {
@@ -43,8 +41,9 @@ module.exports = {
       errorMessagge: "User not found",
     };
   },
-  getUserByPersonalInfo: async (mongo, username, email, phone) => {
-    const userCollections = mongo.getDB().collection("user");
+  getUserByPersonalInfo: async (db, username, email, phone) => {
+    const userCollections = db.collection("user");
+    console.log(email);
     const data = await userCollections.findOne({
       $or: [{ email: email }, { username: username }, { phone: phone }],
     });
@@ -61,9 +60,9 @@ module.exports = {
       errorMessagge: "User not found",
     };
   },
-  login: async (mongo, username, password) => {
+  login: async (db, username, password) => {
     if (username && password) {
-      const userCollections = mongo.getDB().collection("user");
+      const userCollections = db.collection("user");
 
       const data = await userCollections.findOne({
         $or: [{ email: username }, { username: username }],
@@ -89,9 +88,9 @@ module.exports = {
       };
     }
   },
-  createAccount: async (mongo, body) => {
+  createAccount: async (db, body) => {
     if (body) {
-      const userCollections = mongo.getDB().collection("user");
+      const userCollections = db.collection("user");
 
       const data = await userCollections.findOne({
         $or: [
@@ -135,8 +134,8 @@ module.exports = {
       };
     }
   },
-  deleteUser: async (mongo, email) => {
-    const userCollections = mongo.getDB().collection("user");
+  deleteUser: async (db, email) => {
+    const userCollections = db.collection("user");
 
     const deleteResponse = await userCollections.deleteOne({ email: email });
 

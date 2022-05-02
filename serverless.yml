@@ -7,13 +7,37 @@ provider:
   memorySize: 128
 functions:
   app:
-    handler: app/app.handler
+    handler: src/app.handler
     events:
       - http:
           path: /
-          method: ANY
-          cors: true
+          method: GET
+          cors: false
       - http:
-          path: /{proxy+}
-          method: ANY
-          cors: true
+          path: /users
+          method: GET
+          cors: false
+      - http:
+          path: /login
+          method: POST
+          cors: false
+      - http:
+          path: /user/create
+          method: POST
+          cors: false
+      - http:
+          path: /user/{email}
+          method: GET
+          cors: false
+      - http:
+          path: /user/by/personal_info
+          method: POST
+          cors: false
+      - http:
+          path: /user/update/{email}
+          method: PUT
+          cors: false
+      - http:
+          path: /user/delete/{email}
+          method: DELETE
+          cors: false
