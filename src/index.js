@@ -1,4 +1,3 @@
-const serverless = require("serverless-http");
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectToDatabase = require("./conn.js");
@@ -58,20 +57,7 @@ app.get("/users", async (req, res) => {
   res.json(result);
 });
 
-let serverlessInstance;
-
-const setup = async (event, context) => {
-  context.callbackWaitsForEmptyEventLoop = false;
+app.listen(process.env.PORT, async () => {
   db = await connectToDatabase();
-  serverlessInstance = serverless(app);
-
-  return serverlessInstance(event, context);
-};
-
-const handler = (event, context) => {
-  if (serverlessInstance) return serverlessInstance(event, context);
-
-  return setup(event, context);
-};
-
-module.exports.handler = handler;
+  console.log(`Listening on PORT: ${process.env.PORT}`);
+});
