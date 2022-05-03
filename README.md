@@ -36,13 +36,14 @@ PORT=8000
 | NAME                  | DESCRIPTION                           | URL    | METHOD | BODY |
 | --------------------- | ------------------------------------- | ------ | ------ | ---- |
 | Users                 | Return a list of all users in the app. | /users | GET    | NA   |
-| Login                 | Login in the app and return the logged in user. | /login | POST    | ```
+| Login                 | Login in the app and return the logged in user. | /login | POST    | 
+```
 {
   "username": "username",
   "password": "password"
 }
-```   |
-
+```
+|
 | Create-User           | Return a list of all users in the app | /users | GET    | NA   |
 | User-by-email         | Return a list of all users in the app | /users | GET    | NA   |
 | User-by-personal-info | Return a list of all users in the app | /users | GET    | NA   |
