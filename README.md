@@ -22,3 +22,15 @@ DontForgetMe is an IOS app which objective is to remeber you each time you are l
   * Create a new schedule
   * Update an existing schedule
   * Delete schedules
+## Run local dev stage
+1. First, create a Mongo database with the name **DFM**, with a collection named **user**.
+2. Next, you need to create a .env file in the root directory which contains this variables:
+```
+DB_URL=<mongodb_connection_string>/DFM?retryWrites=true&w=majority
+PORT=8000
+```
+3. Third, run `npm i` in order to install the project dependencies.
+4. Last, run `npm run dev` and test the root [endpoint](http://localhost:8000/).
+
+## API Endpoints
+TODO
