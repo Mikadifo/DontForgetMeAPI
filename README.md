@@ -33,4 +33,6 @@ PORT=8000
 4. Last, run `npm run dev` and test the root [endpoint](http://localhost:8000/).
 
 ## API Endpoints
-TODO
+| NAME  | DESCRIPTION                           | URL    | METHOD | BODY |
+| ----- | ------------------------------------- | ------ | ------ | ---- |
+| Users | Return a list of all users in the app | /users | GET    | NA   |
