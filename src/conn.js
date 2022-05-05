@@ -1,16 +1,17 @@
-require("dotenv").config();
 const MongoClient = require("mongodb").MongoClient;
+require("dotenv").config();
 
 const MONGO_URI = process.env.DB_URL;
-let cachedDB = null;
+let dbConnection;
 
 module.exports = async () => {
-  if (cachedDB) {
-    return cachedDB;
+  if (dbConnection) {
+    return dbConnection;
   }
 
   const client = await MongoClient.connect(MONGO_URI);
-  const db = await client.db("DFM");
-  cachedDB = db;
+  const db = client.db("DFM");
+  dbConnection = db;
+
   return db;
 };

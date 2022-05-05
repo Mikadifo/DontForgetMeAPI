@@ -1,5 +1,9 @@
+const connectDB = require("./conn");
+
 module.exports = {
-  getUsers: async (db) => {
+  getUsers: async () => {
+    const db = await connectDB();
+    console.log("DDBDBDD = " + db);
     const data = await db.collection("user").find({}).toArray();
 
     return {
@@ -7,7 +11,8 @@ module.exports = {
       users: data,
     };
   },
-  update: async (db, email, body) => {
+  update: async (email, body) => {
+    const db = await connectDB();
     const userCollections = db.collection("user");
     const updateResponse = await userCollections.updateOne(
       { email: email },
@@ -25,7 +30,8 @@ module.exports = {
       errorMessagge: "Error updating user. Try again",
     };
   },
-  getUserByEmail: async (db, email) => {
+  getUserByEmail: async (email) => {
+    const db = await connectDB();
     const userCollections = db.collection("user");
     const data = await userCollections.findOne({ email: email });
 
@@ -41,9 +47,9 @@ module.exports = {
       errorMessagge: "User not found",
     };
   },
-  getUserByPersonalInfo: async (db, username, email, phone) => {
+  getUserByPersonalInfo: async (username, email, phone) => {
+    const db = await connectDB();
     const userCollections = db.collection("user");
-    console.log(email);
     const data = await userCollections.findOne({
       $or: [{ email: email }, { username: username }, { phone: phone }],
     });
@@ -60,7 +66,8 @@ module.exports = {
       errorMessagge: "User not found",
     };
   },
-  login: async (db, username, password) => {
+  login: async (username, password) => {
+    const db = await connectDB();
     if (username && password) {
       const userCollections = db.collection("user");
 
@@ -88,7 +95,8 @@ module.exports = {
       };
     }
   },
-  createAccount: async (db, body) => {
+  createAccount: async (body) => {
+    const db = await connectDB();
     if (body) {
       const userCollections = db.collection("user");
 
@@ -134,7 +142,8 @@ module.exports = {
       };
     }
   },
-  deleteUser: async (db, email) => {
+  deleteUser: async (email) => {
+    const db = await connectDB();
     const userCollections = db.collection("user");
 
     const deleteResponse = await userCollections.deleteOne({ email: email });
