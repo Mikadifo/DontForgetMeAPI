@@ -1,63 +1,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const connectToDatabase = require("./conn.js");
-const users = require("./users.js");
-require("dotenv").config();
+const dbConfig = require("./conn");
 
 const app = express();
-let db = null;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  res.send("Welcome to Don't Forget Me API");
+app.use(require("./routes"));
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Server error!");
 });
 
-app.post("/login", async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  const result = await users.login(db, username, password);
-  res.json(result);
-});
+dbConfig.connectToDb((err) => {
+  if (err) {
+    console.error(err);
+    process.exit();
+  }
 
-app.post("/user/create", async (req, res) => {
-  const result = await users.createAccount(db, req.body);
-  res.json(result);
-});
-
-app.get("/user/:email", async (req, res) => {
-  const email = req.params.email;
-  const result = await users.getUserByEmail(db, email);
-  res.json(result);
-});
-
-app.post("/user/by/personal_info", async (req, res) => {
-  const username = req.body.username;
-  const email = req.body.email;
-  const phone = req.body.phone;
-  const result = await users.getUserByPersonalInfo(db, username, email, phone);
-  res.json(result);
-});
-
-app.put("/user/update/:email", async (req, res) => {
-  const email = req.params.email;
-  const result = await users.update(db, email, req.body);
-  res.json(result);
-});
-
-app.delete("/user/delete/:email", async (req, res) => {
-  const email = req.params.email;
-  const result = await users.deleteUser(db, email);
-  res.json(result);
-});
-
-app.get("/users", async (req, res) => {
-  const result = await users.getUsers(db);
-  res.json(result);
-});
-
-app.listen(process.env.PORT, async () => {
-  db = await connectToDatabase();
-  console.log(`Listening on PORT: ${process.env.PORT}`);
+  app.listen(process.env.PORT, () => {
+    console.log(`Listening on PORT: ${process.env.PORT}`);
+  });
 });
