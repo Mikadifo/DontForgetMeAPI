@@ -3,7 +3,6 @@ const connectDB = require("./conn");
 module.exports = {
   getUsers: async () => {
     const db = await connectDB();
-    console.log("DDBDBDD = " + db);
     const data = await db.collection("user").find({}).toArray();
 
     return {
