@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const dbConfig = require("./conn");
+const connectDb = require("./conn");
 
 const app = express();
 
@@ -12,13 +12,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Server error!");
 });
 
-dbConfig.connectToDb((err) => {
-  if (err) {
-    console.error(err);
-    process.exit();
-  }
-
-  app.listen(process.env.PORT, () => {
-    console.log(`Listening on PORT: ${process.env.PORT}`);
-  });
+app.listen(process.env.PORT, async () => {
+  await connectDb();
+  console.log(`Listening on PORT: ${process.env.PORT}`);
 });

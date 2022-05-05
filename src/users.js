@@ -1,8 +1,8 @@
-const dbConfig = require("./conn");
+const connectDb = require("./conn");
 
 module.exports = {
   getUsers: async () => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     const data = await db.collection("user").find({}).toArray();
 
     return {
@@ -11,7 +11,7 @@ module.exports = {
     };
   },
   update: async (email, body) => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     const userCollections = db.collection("user");
     const updateResponse = await userCollections.updateOne(
       { email: email },
@@ -30,7 +30,7 @@ module.exports = {
     };
   },
   getUserByEmail: async (email) => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     const userCollections = db.collection("user");
     const data = await userCollections.findOne({ email: email });
 
@@ -47,7 +47,7 @@ module.exports = {
     };
   },
   getUserByPersonalInfo: async (username, email, phone) => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     const userCollections = db.collection("user");
     console.log(email);
     const data = await userCollections.findOne({
@@ -67,7 +67,7 @@ module.exports = {
     };
   },
   login: async (username, password) => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     if (username && password) {
       const userCollections = db.collection("user");
 
@@ -96,7 +96,7 @@ module.exports = {
     }
   },
   createAccount: async (body) => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     if (body) {
       const userCollections = db.collection("user");
 
@@ -143,7 +143,7 @@ module.exports = {
     }
   },
   deleteUser: async (email) => {
-    const db = dbConfig.getDb();
+    const db = await connectDb();
     const userCollections = db.collection("user");
 
     const deleteResponse = await userCollections.deleteOne({ email: email });
