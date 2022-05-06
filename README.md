@@ -31,7 +31,10 @@ PORT=8000
 ```
 3. Third, run `npm i` in order to install the project dependencies.
 4. Last, run `npm run dev` and test the root [endpoint](http://localhost:8000/).
-
+## Changes and tests
+First, thanks if you want to collaborate with a improvement in the project, after doing your cahnges run the local server tests using the followin command:
+`npm run test`
+All the tests must pass.
 ## API Endpoints
 | NAME                  | DESCRIPTION                           | URL    | METHOD | BODY |
 | --------------------- | ------------------------------------- | ------ | ------ | ---- |
