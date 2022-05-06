@@ -20,7 +20,7 @@ recordRoutes.route("/users").get(authenticateToken, async (req, res) => {
   res.status(200).json(result);
 });
 
-recordRoutes.route("/user/create").post(authenticateToken, async (req, res) => {
+recordRoutes.route("/user/create").post(async (req, res) => {
   const result = await users.createAccount(req.body);
   res.status(201).json(result);
 });
