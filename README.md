@@ -1,7 +1,7 @@
 # DontForgetMet
 DontForgetMe mobile app backend
 
-DontForgetMe is an IOS app which objective is to remeber you each time you are leaving home for work, school, etc to take your important things with you.
+DontForgetMe is an IOS app which objective is to remember you each time you are leaving home for work, school, etc to take your important things with you.
 
 Master branch is the deployed version in aws-lambda, click [here](https://github.com/Mikadifo/DontForgetMeAPI/tree/local-dev) to checkout to local-dev branch.
 ## Features
