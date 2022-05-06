@@ -125,7 +125,7 @@ module.exports = {
             return {
               statusOk: !!data,
               user: data,
-              token: generateAccessToken({ username: username }),
+              token: generateAccessToken({ username: body.username }),
             };
           }
         }
