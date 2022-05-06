@@ -4,10 +4,6 @@ const { authenticateToken } = require("./jwt");
 
 const recordRoutes = express.Router();
 
-recordRoutes.route("/jwt/auth").get(authenticateToken, (req, res) => {
-  res.status(200).send("Your token is valid username: " + req.user.username);
-});
-
 recordRoutes.route("/").get((req, res) => {
   res.status(204).send("Welcome to Don't Forget Me API");
 });
