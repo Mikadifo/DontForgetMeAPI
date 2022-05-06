@@ -1,7 +1,7 @@
 # DontForgetMet
 DontForgetMe mobile app backend
 
-DontForgetMe is an IOS app which objective is to remeber you each time you are leaving home for work, school, etc to take your important things with you.
+DontForgetMe is an IOS app which objective is to remember you each time you are leaving home for work, school, etc to take your important things with you.
 ## Features
 * Account
   * Login
@@ -24,7 +24,7 @@ DontForgetMe is an IOS app which objective is to remeber you each time you are l
   * Delete schedules
 ## Run local dev stage
 1. First, create a Mongo database with the name **DFM**, with a collection named **user**.
-2. Next, you need to create a .env file in the root directory which contains this variables:
+2. Next, you need to create a .env file in the root directory which contains these variables:
 ```
 DB_URL=<mongodb_connection_string>/DFM?retryWrites=true&w=majority
 PORT=8000
@@ -32,7 +32,7 @@ PORT=8000
 3. Third, run `npm i` in order to install the project dependencies.
 4. Last, run `npm run dev` and test the root [endpoint](http://localhost:8000/).
 ## Changes and tests
-First, thanks if you want to collaborate with a improvement in the project, after doing your cahnges run the local server tests using the followin command:
+First, thanks if you want to collaborate with an improvement in the project, after doing your changes, run the local server tests using the following command:
 `npm run test`
 All the tests must pass.
 ## API Endpoints
