@@ -16,3 +16,5 @@ app.listen(process.env.PORT, async () => {
   await connectDb();
   console.log(`Listening on PORT: ${process.env.PORT}`);
 });
+
+module.exports = app;

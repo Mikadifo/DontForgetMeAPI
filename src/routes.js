@@ -30,7 +30,7 @@ recordRoutes.route("/user/:email").get(async (req, res) => {
   res.status(200).json(result);
 });
 
-recordRoutes.route("/user/by/personal_info").get(async (req, res) => {
+recordRoutes.route("/user/by/personal_info").post(async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const phone = req.body.phone;

@@ -7,9 +7,13 @@
     "serverless-http": "^3.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "^28.0.3",
+    "mongodb-memory-server": "^8.5.2",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.3"
   },
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "NODE_ENV=test jest"
   }
 }
