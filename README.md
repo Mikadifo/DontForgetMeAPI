@@ -25,12 +25,12 @@ Master branch is the deployed version in aws-lambda, click [here](https://github
   * Update an existing schedule
   * Delete schedules
 ## API Endpoints
-| NAME                  | DESCRIPTION                           | URL    | METHOD | BODY |
-| --------------------- | ------------------------------------- | ------ | ------ | ---- |
-| Users                 | Returns a list of all users in the app. | /users | GET    | NA   |
-| Login                 | Login in the app and return the logged in user. | /login | POST    | ` { "username": "username", "password": "password" } ` |
-| Create-User           | Creates a new user and return its information.  | /user/create | POST    | `{ "phone": "1234567890", "password": "password", "things": [], "emergencyContacts": [], "email": "example@exp.exp", "username": "username", "schedules": [] }`   |
-| User-by-email         | Returns a specific user information by the passed email. | /user/{email} | GET    | NA   |
-| User-by-personal-info | Returns a specific user information by the phone, email and username passed. | /user/by/personal\_info | POST    | `{ "email": "example@exp.exp", "username": "username", "phone": "1234567890" }`   |
-| User-update           | Updates a specific user by the passed email. | /user/update/{email} | PUT    | `{ "phone": "1234567890", "username": "username" }`   |
-| User-delete           | Deletes a specific user by the passed email. | /user/delete/{email} | DELETE    | NA   |
+| NAME                  | DESCRIPTION                           | URL    | METHOD | AUTH | BODY |
+| --------------------- | ------------------------------------- | ------ | ------ | ---- | ---- |
+| Users                 | Returns a list of all users in the app. | /users | GET | YES |    | NA   |
+| Login                 | Login in the app and return the logged in user. | /login | POST | NO |    | ` { "username": "username", "password": "password" } ` |
+| Create-User           | Creates a new user and return its information.  | /user/create | POST | NO    | `{ "phone": "1234567890", "password": "password", "things": [], "emergencyContacts": [], "email": "example@exp.exp", "username": "username", "schedules": [] }`   |
+| User-by-email         | Returns a specific user information by the passed email. | /user/{email} | GET | YES    | NA   |
+| User-by-personal-info | Returns a specific user information by the phone, email and username passed. | /user/by/personal\_info | POST  | YES   | `{ "email": "example@exp.exp", "username": "username", "phone": "1234567890" }`   |
+| User-update           | Updates a specific user by the passed email. | /user/update/{email} | PUT | YES    | `{ "phone": "1234567890", "username": "username" }`   |
+| User-delete           | Deletes a specific user by the passed email. | /user/delete/{email} | DELETE | YES    | NA   |
