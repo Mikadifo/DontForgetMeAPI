@@ -12,32 +12,32 @@ functions:
       - http:
           path: /
           method: GET
-          cors: false
+          cors: true
       - http:
           path: /users
           method: GET
-          cors: false
+          cors: true
       - http:
           path: /login
           method: POST
-          cors: false
+          cors: true
       - http:
           path: /user/create
           method: POST
-          cors: false
+          cors: true
       - http:
           path: /user/{email}
           method: GET
-          cors: false
+          cors: true
       - http:
           path: /user/by/personal_info
           method: POST
-          cors: false
+          cors: true
       - http:
           path: /user/update/{email}
           method: PUT
-          cors: false
+          cors: true
       - http:
           path: /user/delete/{email}
           method: DELETE
-          cors: false
+          cors: true

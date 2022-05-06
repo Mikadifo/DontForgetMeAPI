@@ -1,4 +1,5 @@
 const connectDB = require("./conn");
+const { generateAccessToken } = require("./jwt");
 
 module.exports = {
   getUsers: async () => {
@@ -78,6 +79,7 @@ module.exports = {
         return {
           statusOk: !!data,
           user: data,
+          token: generateAccessToken({ username: username }),
         };
       } else {
         return {
@@ -123,6 +125,7 @@ module.exports = {
             return {
               statusOk: !!data,
               user: data,
+              token: generateAccessToken({ username: username }),
             };
           }
         }
