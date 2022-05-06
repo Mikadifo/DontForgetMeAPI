@@ -71,6 +71,7 @@ describe("API correct entry data test", () => {
       expect(res.status).toBe(200);
       expect(res.body.statusOk).toBe(true);
       expect(res.body.user.phone).toBe(examplePhone);
+      expect(res.body.token == null).toBe(false);
     });
   });
 
