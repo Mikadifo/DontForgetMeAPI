@@ -26,8 +26,9 @@ recordRoutes.route("/user/create").post(async (req, res) => {
 });
 
 recordRoutes.route("/user/:email").get(authenticateToken, async (req, res) => {
+  const passwordType = req.header("Password");
   const email = req.params.email;
-  const result = await users.getUserByEmail(email);
+  const result = await users.getUserByEmail(email, passwordType);
   res.status(200).json(result);
 });
 

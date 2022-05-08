@@ -1,5 +1,6 @@
 const connectDB = require("./conn");
 const { generateAccessToken } = require("./jwt");
+const { encryptData, decryptData } = require("./encryptation");
 
 module.exports = {
   getUsers: async () => {
@@ -14,6 +15,9 @@ module.exports = {
   update: async (email, body) => {
     const db = await connectDB();
     const userCollections = db.collection("user");
+    if (body.password) {
+      body.password = encryptData(body.password);
+    }
     const updateResponse = await userCollections.updateOne(
       { email: email },
       { $set: body }
@@ -30,12 +34,14 @@ module.exports = {
       errorMessagge: "Error updating user. Try again",
     };
   },
-  getUserByEmail: async (email) => {
+  getUserByEmail: async (email, passwordType) => {
     const db = await connectDB();
     const userCollections = db.collection("user");
     const data = await userCollections.findOne({ email: email });
 
     if (data) {
+      if (passwordType === "decrypted")
+        data.password = decryptData(data.password);
       return {
         statusOk: !!data,
         user: data,
@@ -74,8 +80,10 @@ module.exports = {
       const data = await userCollections.findOne({
         $or: [{ email: username }, { username: username }],
       });
+      const decryptedPassword = decryptData(data.password);
 
-      if (data && data.password === password) {
+      if (data && decryptedPassword === password) {
+        data.password = password;
         return {
           statusOk: !!data,
           user: data,
@@ -122,6 +130,7 @@ module.exports = {
           const data = await userCollections.findOne({ email: body.email });
 
           if (data) {
+            data.password = decryptData(body.password);
             return {
               statusOk: !!data,
               user: data,
