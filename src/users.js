@@ -76,13 +76,11 @@ module.exports = {
     const db = await connectDB();
     if (username && password) {
       const userCollections = db.collection("user");
-
       const data = await userCollections.findOne({
         $or: [{ email: username }, { username: username }],
       });
-      const decryptedPassword = decryptData(data.password);
 
-      if (data && decryptedPassword === password) {
+      if (data && decryptData(data.password) === password) {
         data.password = password;
         return {
           statusOk: !!data,
